@@ -14,9 +14,7 @@
   </ion-header>
 
   <div id="container">
-    <!-- home.page.html, créer un formulaire permettant de renseigner un
-    pseudonyme, de choisir dans une liste déroulante un niveau de difficulté parmi « easy »,
-    « medium » et « hard » et de mémoriser ou non ces informations. -->
+    <div *ngIf="hidden" >  
       <label>Votre Pseudo</label><br>
       <input type="text" [(ngModel)]="pseudo"><br><br>
 
@@ -27,11 +25,31 @@
         <option value="hard">Difficile</option>
       </select><br>
 
-      <input type="checkbox" id="memo" [(ngModel)]="checked">
-      <label for="memo">Sauvegarder mes informations</label><br><br>
+      <input type="checkbox" id="memo" [(ngModel)]="checkbox" value="true">
+      <label for="memo"> Sauvegarder mes informations</label><br><br>
 
-      <button (click)="Start()">Commencer</button><br><br>
+      <button (click)="start()">Commencer</button><br><br>
+      <div *ngIf="error"><p id="error1">{{error}}</p></div>
 
+    </div>
+
+    <div *ngIf="!hidden">
+      <p>Bienvenue {{pseudo}} !!!</p>
+
+      <p>De quelle couleur est le ?</p><br>
+
+      <button (click)="answer()">Réponse A</button>
+      <button (click)="answer()">Réponse B</button>
+      <button (click)="answer()">Réponse C</button>
+      <button (click)="answer()">Réponse D</button>
+      <br><br>
+
+      <div *ngIf="hiddenBtn"> 
+          <button (click)="next()">Question suivante</button>
+      </div>
+    </div>
+
+      
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
