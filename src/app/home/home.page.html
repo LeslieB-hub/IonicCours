@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Open Trivia
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,6 +14,24 @@
   </ion-header>
 
   <div id="container">
+    <!-- home.page.html, créer un formulaire permettant de renseigner un
+    pseudonyme, de choisir dans une liste déroulante un niveau de difficulté parmi « easy »,
+    « medium » et « hard » et de mémoriser ou non ces informations. -->
+      <label>Votre Pseudo</label><br>
+      <input type="text" [(ngModel)]="pseudo"><br><br>
+
+      <label>Difficulté</label><br>
+      <select [(ngModel)]="difficulty">
+        <option value="easy">Facile</option>
+        <option value="medium">Moyen</option>
+        <option value="hard">Difficile</option>
+      </select><br>
+
+      <input type="checkbox" id="memo" [(ngModel)]="checked">
+      <label for="memo">Sauvegarder mes informations</label><br><br>
+
+      <button (click)="Start()">Commencer</button><br><br>
+
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
