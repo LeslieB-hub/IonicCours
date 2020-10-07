@@ -14,7 +14,7 @@
   </ion-header>
 
   <div id="container">
-    <ion-list *ngIf="hidden">
+    <ion-list *ngIf="!beginGame">
       <ion-item>
         <ion-label position="floating">Votre Pseudo</ion-label>
         <ion-input type="text" [(ngModel)]="pseudo"></ion-input>
@@ -32,24 +32,42 @@
         <ion-label > Sauvegarder mes informations</ion-label>
       </ion-item>
       <ion-button expand="full" (click)="start()">Commencer</ion-button>
-      <div *ngIf="error"><p id="error">{{error}}</p></div>     
+      <!-- <div *ngIf="error"><p id="error">{{error}}</p></div>      -->
     </ion-list>
 
-    <ion-list *ngIf="!hidden">
+    <ion-list *ngIf="beginGame">
       <ion-note color="secondary">Bienvenue {{pseudo}} !!!</ion-note>
-      <h2>De quelle couleur est le ?</h2>
-      <div>
-        <ion-button color="primary" (click)="answer('A')">Réponse A</ion-button>
-        <ion-button color="primary" (click)="answer('B')">Réponse B</ion-button>
-      </div>
-      <div>
-        <ion-button color="primary" (click)="answer('C')">Réponse C</ion-button>
-        <ion-button color="primary" (click)="answer('D')">Réponse D</ion-button>
-      </div>
-      <div *ngIf="hiddenBtn"> 
-        <ion-button expand="full" (click)="next()">Question suivante</ion-button>
-      </div>
+             
+        <ion-text>
+          <h2 [innerHTML]="questionDisplay.question">{{questionDisplay.question}}</h2>
+        </ion-text>
+        
+        <div>
+          <ion-button [color]="colorBtn"  (click)="answer(answers[0])">{{answers[0]}}</ion-button>
+          <ion-button [color]="colorBtn" (click)="answer(answers[1])">{{answers[1]}}</ion-button>
+        </div>
+        <div>
+          <ion-button [color]="colorBtn" (click)="answer(answers[2])">{{answers[2]}}</ion-button>
+          <ion-button [color]="colorBtn" (click)="answer(answers[3])">{{answers[3]}}</ion-button>
+        </div>
+
+        <div *ngIf="nextQuestion"> 
+          <ion-button expand="full" (click)="getQuestionDisplay()">Question suivante</ion-button>
+        </div>
+
+        <!-- <ion-card *ngFor="let question of questions">
+          <ion-card-header>{{question.category}}</ion-card-header>
+          <ion-card-content>{{question.question}}</ion-card-content>
+        </ion-card> -->
+        <!-- <ion-card >
+          <ion-card-header>{{questions[0].category}}</ion-card-header>
+          <ion-card-content>{{questions[0].question}}</ion-card-content>
+        </ion-card> -->
+
     </ion-list>
+
+    
+
 
     <!--TP1 <div *ngIf="hidden" >  
       <label>Votre Pseudo</label><br>
