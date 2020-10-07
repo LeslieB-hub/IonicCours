@@ -14,7 +14,44 @@
   </ion-header>
 
   <div id="container">
-    <div *ngIf="hidden" >  
+    <ion-list *ngIf="hidden">
+      <ion-item>
+        <ion-label position="floating">Votre Pseudo</ion-label>
+        <ion-input type="text" [(ngModel)]="pseudo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Difficulté</ion-label>
+        <ion-select  [(ngModel)]="difficulty">
+          <ion-select-option value="easy">Facile</ion-select-option>
+          <ion-select-option value="medium">Moyen</ion-select-option>
+          <ion-select-option value="hard">Difficile</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-toggle color="primary" [(ngModel)]="checkbox"></ion-toggle>
+        <ion-label > Sauvegarder mes informations</ion-label>
+      </ion-item>
+      <ion-button expand="full" (click)="start()">Commencer</ion-button>
+      <div *ngIf="error"><p id="error">{{error}}</p></div>     
+    </ion-list>
+
+    <ion-list *ngIf="!hidden">
+      <ion-note color="secondary">Bienvenue {{pseudo}} !!!</ion-note>
+      <h2>De quelle couleur est le ?</h2>
+      <div>
+        <ion-button color="primary" (click)="answer('A')">Réponse A</ion-button>
+        <ion-button color="primary" (click)="answer('B')">Réponse B</ion-button>
+      </div>
+      <div>
+        <ion-button color="primary" (click)="answer('C')">Réponse C</ion-button>
+        <ion-button color="primary" (click)="answer('D')">Réponse D</ion-button>
+      </div>
+      <div *ngIf="hiddenBtn"> 
+        <ion-button expand="full" (click)="next()">Question suivante</ion-button>
+      </div>
+    </ion-list>
+
+    <!--TP1 <div *ngIf="hidden" >  
       <label>Votre Pseudo</label><br>
       <input type="text" [(ngModel)]="pseudo"><br><br>
 
@@ -38,16 +75,16 @@
 
       <p>De quelle couleur est le ?</p><br>
 
-      <button (click)="answer()">Réponse A</button>
-      <button (click)="answer()">Réponse B</button>
-      <button (click)="answer()">Réponse C</button>
-      <button (click)="answer()">Réponse D</button>
+      <button (click)="answer('A')">Réponse A</button>
+      <button (click)="answer('B')">Réponse B</button>
+      <button (click)="answer('C')">Réponse C</button>
+      <button (click)="answer('D')">Réponse D</button>
       <br><br>
 
       <div *ngIf="hiddenBtn"> 
           <button (click)="next()">Question suivante</button>
       </div>
-    </div>
+    </div> -->
 
       
     <strong>Ready to create an app?</strong>

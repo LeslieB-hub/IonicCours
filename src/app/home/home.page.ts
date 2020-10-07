@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
   public pseudo : string ='';
-  public difficulty : string = '';
+  public difficulty : string = 'easy';
   // public memorisation = [];
   public error : string = "";
   public checkbox : boolean = false;
@@ -15,35 +16,48 @@ export class HomePage {
   public hiddenBtn : boolean = false;
   
 
-  constructor() {}
+  constructor(private alertCtrl: AlertController, public toastCtrl: ToastController)  {}
 
-  public start(){
+  public async start(){
     this.error = "";
     
     if (this.pseudo.length < 3) {
-      this.error = "Veuillez rentrer un pseudo d'au moins 3 caractères.";
+      // this.error = "Veuillez rentrer un pseudo d'au moins 3 caractères.";
+      const alert = await this.alertCtrl.create({
+        header : 'Informations manquantes',
+        message : "Veuillez rentrer un pseudo d'au moins 3 caractères.",
+        buttons : ["OK"]
+      });
+      alert.present();
       return;
     }
-    if (this.difficulty === undefined) {
-      this.error = "Veuillez rentrer une difficulté.";
+    if (this.difficulty === "") {
+      // this.error = "Veuillez rentrer une difficulté.";
+      const toast = await this.toastCtrl.create({
+        message : "Veuillez rentrer une difficulté.",
+        color: "light",
+        duration : 3000
+      });
+      toast.present();
       return;
     }
 
     this.hidden = false;
         
 
-    // if (this.checkbox) {
-    //   this.memorisation = [
-    //     {
-    //       PseudoM : this.pseudo,
-    //       difficulty : this.difficulty
-    //     }
-    //   ];
-    // }
+    if (this.checkbox) {
+      this.error = "Sauvegarde";
+      // this.memorisation = [
+      //   {
+      //     PseudoM : this.pseudo,
+      //     difficulty : this.difficulty
+      //   }
+      // ];
+    }
 
   }
 
-  public answer(){
+  public answer(reponse : string){
     this.hiddenBtn = !this.hiddenBtn;
   }
 
