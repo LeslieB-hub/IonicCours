@@ -35,26 +35,26 @@
       <!-- <div *ngIf="error"><p id="error">{{error}}</p></div>      -->
     </ion-list>
 
-    <ion-list *ngIf="beginGame">
+    <div *ngIf="beginGame">
       <ion-note color="secondary">Bienvenue {{pseudo}} !!!</ion-note>
-             
-        <ion-text>
-          <h2 [innerHTML]="questionDisplay.question">{{questionDisplay.question}}</h2>
-        </ion-text>
-        
-        <div>
-          <ion-button [color]="colorBtn"  (click)="answer(answers[0])">{{answers[0]}}</ion-button>
-          <ion-button [color]="colorBtn" (click)="answer(answers[1])">{{answers[1]}}</ion-button>
-        </div>
-        <div>
-          <ion-button [color]="colorBtn" (click)="answer(answers[2])">{{answers[2]}}</ion-button>
-          <ion-button [color]="colorBtn" (click)="answer(answers[3])">{{answers[3]}}</ion-button>
-        </div>
-
-        <div *ngIf="nextQuestion"> 
-          <ion-button expand="full" (click)="getQuestionDisplay()">Question suivante</ion-button>
-        </div>
-
+      <ion-text>
+        <h2 [innerHTML]="questionDisplay.question"></h2>
+      </ion-text>
+      <ion-grid>
+        <ion-row >
+            <ion-col size="6" *ngFor="let rep of questionDisplay.reponses">
+              <ion-button color="transparent" (click)="answer(rep)" expand="full"
+                [ngClass]="{'good' : nextQuestion && rep.correct, 'bad' : nextQuestion && !rep.correct, unknown: !nextQuestion}">
+                {{ rep.answer }}
+              </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button *ngIf="nextQuestion && !endGame" expand="full" (click)="questionNext()">Question suivante</ion-button>
+      <ion-button *ngIf="nextQuestion && endGame" expand="full" (click)="back()">Retour</ion-button>
+    </div>
+    
+    
         <!-- <ion-card *ngFor="let question of questions">
           <ion-card-header>{{question.category}}</ion-card-header>
           <ion-card-content>{{question.question}}</ion-card-content>
@@ -63,10 +63,6 @@
           <ion-card-header>{{questions[0].category}}</ion-card-header>
           <ion-card-content>{{questions[0].question}}</ion-card-content>
         </ion-card> -->
-
-    </ion-list>
-
-    
 
 
     <!--TP1 <div *ngIf="hidden" >  
