@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>jeu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="beginGame">
+    <ion-note color="secondary">Bienvenue {{pseudo}} !!!</ion-note>
+    <ion-text>
+      <h2 [innerHTML]="questionDisplay.question"></h2>
+    </ion-text>
+    <ion-grid>
+      <ion-row >
+          <ion-col size="6" *ngFor="let rep of questionDisplay.reponses">
+            <ion-button color="transparent" (click)="answer(rep)" expand="full"
+              [ngClass]="{'good' : nextQuestion && rep.correct, 'bad' : nextQuestion && !rep.correct, unknown: !nextQuestion}">
+              {{ rep.answer }}
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button *ngIf="nextQuestion && !endGame" expand="full" (click)="questionNext()">Question suivante</ion-button>
+    <ion-button *ngIf="nextQuestion && endGame" expand="full" (click)="back()">Retour</ion-button>
+  </div>
+</ion-content>

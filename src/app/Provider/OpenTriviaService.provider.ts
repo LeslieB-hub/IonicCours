@@ -17,7 +17,7 @@ export class OpenTriviaProvider{
             this.httpClient.get('https://opentdb.com/api.php', {params:params})
             .toPromise()
             .then((response)=>{
-                if ( response['response_code']== 0) {
+                if (response['response_code']== 0) {
                     resolve(response['results']);
                 }else{
                     reject("Le serveur n'a pas retourné de valeur!!");
