@@ -28,7 +28,7 @@ export class JeuPage implements OnInit {
     this.route.params.subscribe((params)=>{
       this.pseudo = params['pseudo'];
       this.difficulty = params['difficulty'];
-      console.log("Pseudo : " + this.pseudo+ " Difficulté : "+ this.difficulty );
+      console.log("Pseudo : " + this.pseudo+ ", Difficulté : "+ this.difficulty );
       this.initGame();
     })
 
@@ -42,16 +42,15 @@ export class JeuPage implements OnInit {
   public async initGame(){
 
     await this.getTableQuestion();
-    console.log(this.questions);
+    //console.log(this.questions);
     await this.getQuestionDisplay();
-    console.log(this.questionDisplay);
+    //console.log(this.questionDisplay);
     this.beginGame = true;
   }
 
   public async getTableQuestion(){
     try {
       this.questions = await this.trivialService.getQuestions(2, this.difficulty);
-      console.log(this.questions);
       
     } catch (error) {
       const alert = await this.alertCtrl.create({
@@ -112,7 +111,7 @@ export class JeuPage implements OnInit {
 
   public back(){
     this.router.navigate(['/score', this.points]);
-    this.beginGame = false;
+    //this.beginGame = false;
   }
 
   
